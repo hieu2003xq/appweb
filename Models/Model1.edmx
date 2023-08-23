@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="qlBhModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="donHang">
+          <Key>
+            <PropertyRef Name="maSP" />
+          </Key>
+          <Property Name="Gmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="soLuong" Type="int" Nullable="false" />
+          <Property Name="thanhtien" Type="money" Nullable="false" />
+          <Property Name="tongTien" Type="money" Nullable="false" />
+          <Property Name="maSP" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DonHangRieng">
+          <Key>
+            <PropertyRef Name="maKH" />
+          </Key>
+          <Property Name="maKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="diaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="maSP" Type="int" Nullable="false" />
+          <Property Name="soLuong" Type="int" Nullable="false" />
+          <Property Name="thanhTien" Type="money" Nullable="false" />
+          <Property Name="tongTien" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HSX">
+          <Key>
+            <PropertyRef Name="maHSX" />
+          </Key>
+          <Property Name="maHSX" Type="int" Nullable="false" />
+          <Property Name="tenHSX" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="hinhAnh" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="khachHang">
+          <Key>
+            <PropertyRef Name="maKH" />
+          </Key>
+          <Property Name="maKH" Type="int" Nullable="false" />
+          <Property Name="tenKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Gmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="newpro">
+          <Key>
+            <PropertyRef Name="maSP" />
+          </Key>
+          <Property Name="maSP" Type="int" Nullable="false" />
+          <Property Name="tenSP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="giaBan" Type="money" Nullable="false" />
+          <Property Name="hinhAnh" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sanPham">
+          <Key>
+            <PropertyRef Name="maSP" />
+          </Key>
+          <Property Name="maSP" Type="int" Nullable="false" />
+          <Property Name="tenSP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="giaBan" Type="money" Nullable="false" />
+          <Property Name="hinhAnh" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TkAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="tenDN" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Pass" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tkNguoiDung">
+          <Key>
+            <PropertyRef Name="Gmail" />
+          </Key>
+          <Property Name="Gmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tenDN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassSalt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassHash" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tkUsers">
+          <Key>
+            <PropertyRef Name="Gmail" />
+          </Key>
+          <Property Name="Gmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tenDN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pass" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__donHang__Gmail__0B5CAFEA">
+          <End Role="tkUsers" Type="Self.tkUsers" Multiplicity="1" />
+          <End Role="donHang" Type="Self.donHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tkUsers">
+              <PropertyRef Name="Gmail" />
+            </Principal>
+            <Dependent Role="donHang">
+              <PropertyRef Name="Gmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__donHang__maSP__0C50D423">
+          <End Role="sanPham" Type="Self.sanPham" Multiplicity="1" />
+          <End Role="donHang" Type="Self.donHang" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="sanPham">
+              <PropertyRef Name="maSP" />
+            </Principal>
+            <Dependent Role="donHang">
+              <PropertyRef Name="maSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DonHangRie__maSP__756D6ECB">
+          <End Role="sanPham" Type="Self.sanPham" Multiplicity="1" />
+          <End Role="DonHangRieng" Type="Self.DonHangRieng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sanPham">
+              <PropertyRef Name="maSP" />
+            </Principal>
+            <Dependent Role="DonHangRieng">
+              <PropertyRef Name="maSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__khachHang__Gmail__1B9317B3">
+          <End Role="tkUsers" Type="Self.tkUsers" Multiplicity="1" />
+          <End Role="khachHang" Type="Self.khachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tkUsers">
+              <PropertyRef Name="Gmail" />
+            </Principal>
+            <Dependent Role="khachHang">
+              <PropertyRef Name="Gmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="qlBhModelStoreContainer">
+          <EntitySet Name="donHang" EntityType="Self.donHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DonHangRieng" EntityType="Self.DonHangRieng" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HSX" EntityType="Self.HSX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="khachHang" EntityType="Self.khachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="newpro" EntityType="Self.newpro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sanPham" EntityType="Self.sanPham" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TkAdmin" EntityType="Self.TkAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tkNguoiDung" EntityType="Self.tkNguoiDung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tkUsers" EntityType="Self.tkUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__donHang__Gmail__0B5CAFEA" Association="Self.FK__donHang__Gmail__0B5CAFEA">
+            <End Role="tkUsers" EntitySet="tkUsers" />
+            <End Role="donHang" EntitySet="donHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__donHang__maSP__0C50D423" Association="Self.FK__donHang__maSP__0C50D423">
+            <End Role="sanPham" EntitySet="sanPham" />
+            <End Role="donHang" EntitySet="donHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DonHangRie__maSP__756D6ECB" Association="Self.FK__DonHangRie__maSP__756D6ECB">
+            <End Role="sanPham" EntitySet="sanPham" />
+            <End Role="DonHangRieng" EntitySet="DonHangRieng" />
+          </AssociationSet>
+          <AssociationSet Name="FK__khachHang__Gmail__1B9317B3" Association="Self.FK__khachHang__Gmail__1B9317B3">
+            <End Role="tkUsers" EntitySet="tkUsers" />
+            <End Role="khachHang" EntitySet="khachHang" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="qlBhModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HSX">
+          <Key>
+            <PropertyRef Name="maHSX" />
+          </Key>
+          <Property Name="maHSX" Type="Int32" Nullable="false" />
+          <Property Name="tenHSX" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hinhAnh" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="newpro">
+          <Key>
+            <PropertyRef Name="maSP" />
+          </Key>
+          <Property Name="maSP" Type="Int32" Nullable="false" />
+          <Property Name="tenSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="giaBan" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="hinhAnh" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sanPham">
+          <Key>
+            <PropertyRef Name="maSP" />
+          </Key>
+          <Property Name="maSP" Type="Int32" Nullable="false" />
+          <Property Name="tenSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="giaBan" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="hinhAnh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DonHangRieng" Relationship="qlBhModel.FK__DonHangRie__maSP__756D6ECB" FromRole="sanPham" ToRole="DonHangRieng" />
+          <NavigationProperty Name="donHang" Relationship="qlBhModel.FK__donHang__maSP__0C50D423" FromRole="sanPham" ToRole="donHang" />
+        </EntityType>
+        <EntityType Name="TkAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="tenDN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="qlBhEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HSX" EntityType="Self.HSX" />
+          <EntitySet Name="newpro" EntityType="Self.newpro" />
+          <EntitySet Name="sanPham" EntityType="Self.sanPham" />
+          <EntitySet Name="TkAdmin" EntityType="Self.TkAdmin" />
+          <EntitySet Name="tkUsers" EntityType="qlBhModel.tkUsers" />
+          <EntitySet Name="DonHangRieng" EntityType="qlBhModel.DonHangRieng" />
+          <AssociationSet Name="FK__DonHangRie__maSP__756D6ECB" Association="qlBhModel.FK__DonHangRie__maSP__756D6ECB">
+            <End Role="sanPham" EntitySet="sanPham" />
+            <End Role="DonHangRieng" EntitySet="DonHangRieng" />
+          </AssociationSet>
+          <EntitySet Name="donHang" EntityType="qlBhModel.donHang" />
+          <AssociationSet Name="FK__donHang__Gmail__0B5CAFEA" Association="qlBhModel.FK__donHang__Gmail__0B5CAFEA">
+            <End Role="tkUsers" EntitySet="tkUsers" />
+            <End Role="donHang" EntitySet="donHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK__donHang__maSP__0C50D423" Association="qlBhModel.FK__donHang__maSP__0C50D423">
+            <End Role="sanPham" EntitySet="sanPham" />
+            <End Role="donHang" EntitySet="donHang" />
+          </AssociationSet>
+          <EntitySet Name="khachHang" EntityType="qlBhModel.khachHang" />
+          <AssociationSet Name="FK__khachHang__Gmail__1B9317B3" Association="qlBhModel.FK__khachHang__Gmail__1B9317B3">
+            <End Role="tkUsers" EntitySet="tkUsers" />
+            <End Role="khachHang" EntitySet="khachHang" />
+          </AssociationSet>
+          <EntitySet Name="tkNguoiDung" EntityType="qlBhModel.tkNguoiDung" />
+          </EntityContainer>
+        <EntityType Name="tkUsers">
+          <Key>
+            <PropertyRef Name="Gmail" />
+          </Key>
+          <Property Name="Gmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tenDN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="donHang" Relationship="qlBhModel.FK__donHang__Gmail__0B5CAFEA" FromRole="tkUsers" ToRole="donHang" />
+          <NavigationProperty Name="khachHang" Relationship="qlBhModel.FK__khachHang__Gmail__1B9317B3" FromRole="tkUsers" ToRole="khachHang" />
+        </EntityType>
+        <EntityType Name="DonHangRieng">
+          <Key>
+            <PropertyRef Name="maKH" />
+          </Key>
+          <Property Name="maKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="diaChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="maSP" Type="Int32" Nullable="false" />
+          <Property Name="soLuong" Type="Int32" Nullable="false" />
+          <Property Name="thanhTien" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="tongTien" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="sanPham" Relationship="qlBhModel.FK__DonHangRie__maSP__756D6ECB" FromRole="DonHangRieng" ToRole="sanPham" />
+        </EntityType>
+        <Association Name="FK__DonHangRie__maSP__756D6ECB">
+          <End Type="qlBhModel.sanPham" Role="sanPham" Multiplicity="1" />
+          <End Type="qlBhModel.DonHangRieng" Role="DonHangRieng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sanPham">
+              <PropertyRef Name="maSP" />
+            </Principal>
+            <Dependent Role="DonHangRieng">
+              <PropertyRef Name="maSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="donHang">
+          <Key>
+            <PropertyRef Name="maSP" />
+          </Key>
+          <Property Name="Gmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="soLuong" Type="Int32" Nullable="false" />
+          <Property Name="thanhtien" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="tongTien" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="maSP" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tkUsers" Relationship="qlBhModel.FK__donHang__Gmail__0B5CAFEA" FromRole="donHang" ToRole="tkUsers" />
+          <NavigationProperty Name="sanPham" Relationship="qlBhModel.FK__donHang__maSP__0C50D423" FromRole="donHang" ToRole="sanPham" />
+        </EntityType>
+        <Association Name="FK__donHang__Gmail__0B5CAFEA">
+          <End Type="qlBhModel.tkUsers" Role="tkUsers" Multiplicity="1" />
+          <End Type="qlBhModel.donHang" Role="donHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tkUsers">
+              <PropertyRef Name="Gmail" />
+            </Principal>
+            <Dependent Role="donHang">
+              <PropertyRef Name="Gmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__donHang__maSP__0C50D423">
+          <End Type="qlBhModel.sanPham" Role="sanPham" Multiplicity="1" />
+          <End Type="qlBhModel.donHang" Role="donHang" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="sanPham">
+              <PropertyRef Name="maSP" />
+            </Principal>
+            <Dependent Role="donHang">
+              <PropertyRef Name="maSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="khachHang">
+          <Key>
+            <PropertyRef Name="maKH" />
+          </Key>
+          <Property Name="maKH" Type="Int32" Nullable="false" />
+          <Property Name="tenKH" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Gmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tkUsers" Relationship="qlBhModel.FK__khachHang__Gmail__1B9317B3" FromRole="khachHang" ToRole="tkUsers" />
+        </EntityType>
+        <Association Name="FK__khachHang__Gmail__1B9317B3">
+          <End Type="qlBhModel.tkUsers" Role="tkUsers" Multiplicity="1" />
+          <End Type="qlBhModel.khachHang" Role="khachHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tkUsers">
+              <PropertyRef Name="Gmail" />
+            </Principal>
+            <Dependent Role="khachHang">
+              <PropertyRef Name="Gmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tkNguoiDung">
+          <Key>
+            <PropertyRef Name="Gmail" />
+          </Key>
+          <Property Name="Gmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tenDN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassSalt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassHash" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="qlBhModelStoreContainer" CdmEntityContainer="qlBhEntities">
+          <EntitySetMapping Name="HSX">
+            <EntityTypeMapping TypeName="qlBhModel.HSX">
+              <MappingFragment StoreEntitySet="HSX">
+                <ScalarProperty Name="maHSX" ColumnName="maHSX" />
+                <ScalarProperty Name="tenHSX" ColumnName="tenHSX" />
+                <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="newpro">
+            <EntityTypeMapping TypeName="qlBhModel.newpro">
+              <MappingFragment StoreEntitySet="newpro">
+                <ScalarProperty Name="maSP" ColumnName="maSP" />
+                <ScalarProperty Name="tenSP" ColumnName="tenSP" />
+                <ScalarProperty Name="giaBan" ColumnName="giaBan" />
+                <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sanPham">
+            <EntityTypeMapping TypeName="qlBhModel.sanPham">
+              <MappingFragment StoreEntitySet="sanPham">
+                <ScalarProperty Name="maSP" ColumnName="maSP" />
+                <ScalarProperty Name="tenSP" ColumnName="tenSP" />
+                <ScalarProperty Name="giaBan" ColumnName="giaBan" />
+                <ScalarProperty Name="hinhAnh" ColumnName="hinhAnh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TkAdmin">
+            <EntityTypeMapping TypeName="qlBhModel.TkAdmin">
+              <MappingFragment StoreEntitySet="TkAdmin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tenDN" ColumnName="tenDN" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tkUsers">
+            <EntityTypeMapping TypeName="qlBhModel.tkUsers">
+              <MappingFragment StoreEntitySet="tkUsers">
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="tenDN" ColumnName="tenDN" />
+                <ScalarProperty Name="Gmail" ColumnName="Gmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonHangRieng">
+            <EntityTypeMapping TypeName="qlBhModel.DonHangRieng">
+              <MappingFragment StoreEntitySet="DonHangRieng">
+                <ScalarProperty Name="tongTien" ColumnName="tongTien" />
+                <ScalarProperty Name="thanhTien" ColumnName="thanhTien" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="maSP" ColumnName="maSP" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="diaChi" ColumnName="diaChi" />
+                <ScalarProperty Name="tenKH" ColumnName="tenKH" />
+                <ScalarProperty Name="maKH" ColumnName="maKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="donHang">
+            <EntityTypeMapping TypeName="qlBhModel.donHang">
+              <MappingFragment StoreEntitySet="donHang">
+                <ScalarProperty Name="maSP" ColumnName="maSP" />
+                <ScalarProperty Name="tongTien" ColumnName="tongTien" />
+                <ScalarProperty Name="thanhtien" ColumnName="thanhtien" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="Gmail" ColumnName="Gmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="khachHang">
+            <EntityTypeMapping TypeName="qlBhModel.khachHang">
+              <MappingFragment StoreEntitySet="khachHang">
+                <ScalarProperty Name="Gmail" ColumnName="Gmail" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="tenKH" ColumnName="tenKH" />
+                <ScalarProperty Name="maKH" ColumnName="maKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tkNguoiDung">
+            <EntityTypeMapping TypeName="qlBhModel.tkNguoiDung">
+              <MappingFragment StoreEntitySet="tkNguoiDung">
+                <ScalarProperty Name="PassHash" ColumnName="PassHash" />
+                <ScalarProperty Name="PassSalt" ColumnName="PassSalt" />
+                <ScalarProperty Name="tenDN" ColumnName="tenDN" />
+                <ScalarProperty Name="Gmail" ColumnName="Gmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

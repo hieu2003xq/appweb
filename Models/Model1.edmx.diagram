@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7c754d2db07347d78c864b87de482927" Name="Diagram1">
+        <EntityTypeShape EntityType="qlBhModel.HSX" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlBhModel.newpro" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlBhModel.sanPham" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlBhModel.TkAdmin" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="qlBhModel.tkUsers" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="qlBhModel.DonHangRieng" Width="1.5" PointX="3" PointY="5.375" />
+        <AssociationConnector Association="qlBhModel.FK__DonHangRie__maSP__756D6ECB" />
+        <EntityTypeShape EntityType="qlBhModel.donHang" Width="1.5" PointX="3" PointY="2.125" />
+        <AssociationConnector Association="qlBhModel.FK__donHang__Gmail__0B5CAFEA" />
+        <AssociationConnector Association="qlBhModel.FK__donHang__maSP__0C50D423" />
+        <EntityTypeShape EntityType="qlBhModel.khachHang" Width="1.5" PointX="3" PointY="9.75" />
+        <AssociationConnector Association="qlBhModel.FK__khachHang__Gmail__1B9317B3" />
+        <EntityTypeShape EntityType="qlBhModel.tkNguoiDung" Width="1.5" PointX="8.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
