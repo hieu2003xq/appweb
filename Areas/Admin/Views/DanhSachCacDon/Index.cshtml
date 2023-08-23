@@ -1,0 +1,73 @@
+﻿@model List<appweb.Models.donHang>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DanhSachSP</title>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <th>
+                        Gmail
+                    </th>
+                    <th>
+                        Mã Sản Phẩm
+                    </th>
+                    <th>
+                        Tên Sản Phẩm
+                    </th>
+                    <th>
+                        Giá Bán
+                    </th>
+                    <th>
+                        Hình Ảnh
+                    </th>
+                    <th>
+                       Số Lượng
+                    </th>
+                    <th>
+                       Thành Tiền
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("DonTheoTen", "DanhSachCacDon", new {Gmail=item.Gmail})" style="left:30px;right:30px">@item.Gmail</a>
+                        </td>
+                        <td>
+                            <a href="#" style="left:30px;right:30px">@item.maSP</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sanPham.tenSP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sanPham.giaBan)
+                        </td>
+
+                        <td>
+                            <img src="~/img/@item.sanPham.hinhAnh" style="height;right:30px">
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.soLuong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.thanhtien)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</body>
+</html>

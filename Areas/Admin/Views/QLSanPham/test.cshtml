@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetList</title>
+
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link href="~/Areas/Admin/content/css/semantic.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/content/css/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/content/js/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <link href="~/Areas/Admin/content/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+    <script src="~/Areas/Admin/content/js/plugin/mustache.min.js"></script>
+    <script src="~/Areas/Admin/content/js/bootstrap.js"></script>
+
+</head>
+<body>
+    <div>
+        <table  class="ui celled table" id="tb" >
+            <thead>
+                <tr>
+                    <th>maSP</th>
+                    <th>tenSP</th>
+                    <th>giaBan</th>
+                    <th>hinhAnh</th>
+                   
+
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+            
+        </table>
+        <script>
+            $(document).ready(function () {
+                fetch("/Admin/QLSanPham/GetList", {
+                    method : 'GET',
+                })
+                    .then((res) => {
+                        return res.json();
+                    })
+                    .then(resData => {
+                        $("#tb").DataTable({
+                            data: resData , 
+                                columns: [
+                                    { data: 'maSP' },
+                                    { data: 'tenSP' },
+                                    { data: 'giaBan' },
+                                   { data:'hinhAnh' },
+                            ],
+                        }); serverSide: true
+                    }) 
+            })
+        </script>
+
+
+
+
+    </div>
+</body>
+</html>

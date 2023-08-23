@@ -1,0 +1,56 @@
+﻿@model IEnumerable<appweb.Models.KhachHang>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DanhSach</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("ThemMoi","ThemMoi")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tenKH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.diaChi)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diaChi)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.maKH }) |
+                @Html.ActionLink("Details", "Details", new { id=item.maKH }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.maKH })
+            </td>
+           
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

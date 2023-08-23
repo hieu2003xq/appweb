@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DonTheoTen</title>
+</head>
+<body>
+    <div>
+        @{
+
+
+            foreach (var item in Model)
+            {
+
+                <tr class="cart_item">
+                    <td class="product-thumbnail">
+                        <a href="@Url.Action("DonTheoTen", "DanhSachCacDon", new {Gmail=item.Gmail})">@item.Gmail</a>
+                    </td>
+
+                    <td class="product-thumbnail">
+                        <a href="@Url.Action("shopSP", "chiTietSP", new { id = item.maSP })"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="~/img/@item.sanPham.hinhAnh"></a>
+                    </td>
+
+                    <td class="product-name">
+                        <a href="@Url.Action("shopSP", "chiTietSP", new { id = item.maSP })">@item.sanPham.tenSP</a>
+                    </td>
+
+                    <td class="product-price">
+                        <span class="amount">@item.sanPham.giaBan</span>
+                    </td>
+
+                    <td class="product-quantity">
+                        @item.soLuong
+                    </td>
+                    <td class="product-quantity">
+                        @item.thanhtien
+                    </td>
+
+
+                </tr>
+
+
+            }
+
+        }
+    </div>
+</body>
+</html>

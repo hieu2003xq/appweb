@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ThemMoiSP</title>
+    
+</head>
+<body>
+    <form method="post">
+        @Html.AntiForgeryToken();
+        <div class="form-group">
+            <label for="maSP" class="form-control">Mã Sản Phẩm</label>
+            <input name="maSP" id="maSP" placeholder="Mã Sản Phẩm" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="tenSP" class="form-control">ten SP</label>
+            <input name="tenSP" id="tenSP" placeholder="ten san pham" class="form-control" />
+            @TempData["antiXSS"]
+
+        </div>
+        <div class="form-group">
+            <label for="giaBan">Giá Bán</label>
+            <input name="giaBan" id="giaBan" placeholder="Giá Bán" />
+        </div>
+        <div class="form-group">
+            <label for="hinhAnh" class="form-control">Hình ảnh</label>
+            <input name="hinhAnh" type="file" id="hinhAnh" placeholder="Hình ảnh" class="form-control" />
+        </div>
+        <div class="form-group">
+        <button type="submit" class="form-control">Thêm</button>
+            </div>
+    </form>
+
+    <div>
+        @Html.ActionLink("Back to List", "DanhSachSP")
+    </div>
+</body>
+</html>

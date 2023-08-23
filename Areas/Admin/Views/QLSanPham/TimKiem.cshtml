@@ -1,0 +1,23 @@
+﻿@model List<appweb.Models.sanPham>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TimKiem</title>
+</head>
+<body>
+    <div>
+        @foreach (var item in Model)
+        {
+            <div>@item.tenSP</div>
+            <img src="~/img/@item.hinhAnh" />
+            <div>@item.giaBan</div>
+        }
+    </div>
+</body>
+</html>

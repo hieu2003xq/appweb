@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>thu</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+
+
+<body>
+
+    <div>
+        <table class="ui celled table" id="tb">
+            <thead>
+                <tr>
+
+                    <th>maSP</th>
+                    <th>tenSP</th>
+                    <th>giaBan</th>
+                    <th>hinhAnh</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+
+
+        </table>
+        <script src="~/Scripts/jquery-3.7.0.js"></script>
+        <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+        <script src="~/Script/bootstrap.js"></script>
+        <script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+        <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#tb').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    paging: true,
+                    "ajax": {
+                        "url": "/Admin/QLSanPham/GetList",
+                        "type": "GET",
+                        "datatype": "json",
+                    },
+                    "columns": [
+                        { "data": "maSP" },
+                        { "data": "tenSP"},
+                        { "data": "giaBan" },
+                        { "data": "hinhAnh" },
+                        
+                    ]
+                });
+
+            });
+            
+        </script>
+    </div>
+</body>
+</html>
